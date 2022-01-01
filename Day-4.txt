@@ -1,0 +1,108 @@
+Question-1:
+
+How to compare two JSON have the same properties without order?
+var obj1 = { name: "Person 1", age:5 };
+var obj2 = { age:5, name: "Person 1" };
+
+Answer::
+
+Code:
+
+HTML CODE::
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+    <title>Document</title>
+    </style>
+</head>
+<body>
+    <h1>Hello, First Sample page😎 </h1>
+<script src="script.js"></script>  
+</body>
+</html>
+
+JAVASCRIPT CODE::
+
+var object1 = { name: "Person 1", age:5 };
+var object2 = { age:5, name: "Person 1" };
+console.log(_.isEqual(object1, object2))
+
+Output::
+PS C:\Users\zeesh\Desktop\Guvi_BootCamp\Day-3> node script.js
+true
+//The comparison is done with the lodash _.isEqual method. JSON.Stringify method is not helpful here due to order requirement and hence the output with stringify is false.
+
+
+Question-2:
+
+Use the rest countries API url -> https://restcountries.eu/rest/v2/all and display all the country flags in console
+
+Answer::
+
+Code:
+
+var xhr = new XMLHttpRequest();
+
+xhr.open("GET", "https://raw.githubusercontent.com/rvsp/restcountries-json-data/master/res-countries.json");
+
+xhr.onload = function () {
+  if (xhr.status >= 200 && xhr.status < 300) {
+    let data = JSON.parse(this.response);
+    for (let i = 0; i < data.length; i++) {
+      let country1 = data[i]; 
+      console.log(country1.flag);
+    }
+  }
+};
+xhr.send();
+
+Output::
+
+script.js:79 https://restcountries.eu/data/afg.svg
+script.js:79 https://restcountries.eu/data/ala.svg
+script.js:79 https://restcountries.eu/data/alb.svg
+script.js:79 https://restcountries.eu/data/dza.svg
+script.js:79 https://restcountries.eu/data/asm.svg
+//There are 245 more lines displayed, which could not be shown here for the sake of brevity
+//Also, the link to flag display files are not working.
+
+Question-3:
+Use the same rest countries and print all countries name, region, sub region and population
+
+Answer::
+
+code:
+
+var xhr = new XMLHttpRequest();
+
+xhr.open("GET", "https://raw.githubusercontent.com/rvsp/restcountries-json-data/master/res-countries.json");
+
+xhr.onload = function () {
+  if (xhr.status >= 200 && xhr.status < 300) {
+    let data = JSON.parse(this.response);
+    for (let i = 0; i < data.length; i++) {
+      let country1 = data[i]; 
+      console.log(`
+      Name: ${country1.name}
+      Region: ${country1.region}
+      SubRegion: ${country1.subregion}
+      Population: ${country1.population}
+      `);
+    }
+  }
+};
+xhr.send();
+
+
+Output:
+ Name: Afghanistan
+      Region: Asia
+      SubRegion: Southern Asia
+      Population: 27657145
+
+//There are 247 more datasets displayed in the console, which could not be shown here for the sake of brevity      
